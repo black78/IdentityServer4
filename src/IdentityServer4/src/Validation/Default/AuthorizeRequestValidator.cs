@@ -237,7 +237,10 @@ namespace IdentityServer4.Validation
                 var responseType = request.Raw.Get(OidcConstants.AuthorizeRequest.ResponseType);
                 if (responseType != null)
                 {
-                    if (jwtRequestValidationResult.Payload.TryGetValue(OidcConstants.AuthorizeRequest.ResponseType, out var payloadResponseType))
+                    var payloadResponseType =
+                        jwtRequestValidationResult.Payload.SingleOrDefault(c => c.Type == OidcConstants.AuthorizeRequest.ResponseType)?.Value;
+
+                    if (!string.IsNullOrEmpty(payloadResponseType))
                     {
                         if (payloadResponseType != responseType)
                         {
@@ -248,7 +251,10 @@ namespace IdentityServer4.Validation
                 }
 
                 // validate client_id mismatch
-                if (jwtRequestValidationResult.Payload.TryGetValue(OidcConstants.AuthorizeRequest.ClientId, out var payloadClientId))
+                var payloadClientId =
+                    jwtRequestValidationResult.Payload.SingleOrDefault(c => c.Type == OidcConstants.AuthorizeRequest.ClientId)?.Value;
+
+                if (!string.IsNullOrEmpty(payloadClientId))
                 {
                     if (!string.Equals(request.Client.ClientId, payloadClientId, StringComparison.Ordinal))
                     {
@@ -269,23 +275,18 @@ namespace IdentityServer4.Validation
                 };
 
                 // merge jwt payload values into original request parameters
-                foreach (var key in jwtRequestValidationResult.Payload.Keys)
+                foreach (var claimType in jwtRequestValidationResult.Payload.Select(x => x.Type).Distinct())
                 {
-                    if (ignoreKeys.Contains(key)) continue;
-                    
-                    var value = jwtRequestValidationResult.Payload[key];
-                    
-                    var qsValue = request.Raw.Get(key);
+                    var qsValue = request.Raw.Get(claimType);
                     if (qsValue != null)
                     {
-                        if (!string.Equals(value, qsValue, StringComparison.Ordinal))
-                        {
-                            LogError("parameter mismatch between request object and query string parameter.", request);
-                            return Invalid(request, description: "Parameter mismatch in JWT request");
-                        }
+                        request.Raw.Remove(claimType);
                     }
+                }
 
-                    request.Raw.Set(key, value);
+                foreach (var claim in jwtRequestValidationResult.Payload)
+                {
+                    request.Raw.Add(claim.Type, claim.Value);
                 }
 
                 request.RequestObjectValues = jwtRequestValidationResult.Payload;

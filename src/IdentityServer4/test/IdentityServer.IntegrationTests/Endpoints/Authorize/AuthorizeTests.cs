@@ -1060,7 +1060,7 @@ namespace IdentityServer.IntegrationTests.Endpoints.Authorize
                 nonce: "123_nonce");
 
             Func<Task> a = () => _mockPipeline.BrowserClient.GetAsync(url);
-            a.Should().Throw<Exception>();
+            a.Should().ThrowAsync<Exception>().Wait();
         }
 
         [Fact]

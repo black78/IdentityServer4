@@ -64,7 +64,7 @@ namespace IdentityServer.UnitTests.Validation.Secrets
             };
 
             Func<Task> act = async () => await validator.ValidateAsync(client.ClientSecrets, secret);
-            act.Should().Throw<InvalidOperationException>();
+            act.Should().ThrowAsync<InvalidOperationException>().Wait();
         }
 
         [Fact]
@@ -151,7 +151,7 @@ namespace IdentityServer.UnitTests.Validation.Secrets
             };
 
             Func<Task> act = async () => await validator.ValidateAsync(client.ClientSecrets, secret);
-            act.Should().Throw<InvalidOperationException>();
+            act.Should().ThrowAsync<InvalidOperationException>().Wait();
         }
 
         [Fact]

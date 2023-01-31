@@ -1,4 +1,4 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
@@ -188,7 +188,7 @@ namespace IdentityServer.UnitTests.Validation
             result.Jwt.Should().NotBeNullOrEmpty();
             result.Client.ClientId.Should().Be("roclient");
 
-            result.Claims.Count().Should().Be(8);
+            result.Claims.Count().Should().Be(9);
             var scopes = result.Claims.Where(c => c.Type == "scope").Select(c => c.Value).ToArray();
             scopes.Count().Should().Be(2);
             scopes[0].Should().Be("read");
