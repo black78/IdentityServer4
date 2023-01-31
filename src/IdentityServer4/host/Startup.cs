@@ -3,24 +3,29 @@
 
 
 using System;
-using IdentityServerHost.Configuration;
-using IdentityModel;
-using IdentityServer4;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Logging;
-using Microsoft.IdentityModel.Tokens;
-using Serilog;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+
+using IdentityModel;
+
+using IdentityServer4;
+
+using IdentityServerHost.Configuration;
 using IdentityServerHost.Extensions;
-using Microsoft.AspNetCore.Authentication.Certificate;
-using Microsoft.AspNetCore.HttpOverrides;
 using IdentityServerHost.Quickstart.UI;
+
+using Microsoft.AspNetCore.Authentication.Certificate;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Tokens;
+
+using Serilog;
 
 namespace IdentityServerHost
 {

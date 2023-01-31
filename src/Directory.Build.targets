@@ -1,11 +1,11 @@
 <Project>
 
   <PropertyGroup>
-    <FrameworkVersion>7.0.1</FrameworkVersion>
-    <ExtensionsVersion>7.0.1</ExtensionsVersion>
-    <EntityFrameworkVersion>7.0.1</EntityFrameworkVersion>
+    <FrameworkVersion>7.0.2</FrameworkVersion>
+    <ExtensionsVersion>7.0.2</ExtensionsVersion>
+    <EntityFrameworkVersion>7.0.2</EntityFrameworkVersion>
     
-    <IdentityServerVersion>4.1.3-*</IdentityServerVersion>
+    <IdentityServerVersion>4.1.4-*</IdentityServerVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,7 +39,6 @@
     <PackageReference Update="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(ExtensionsVersion)" />
     
     <!--misc -->
-    <PackageReference Update="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Update="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="6.26.0" />
     <PackageReference Update="System.IdentityModel.Tokens.Jwt" Version="6.26.0" />
     <PackageReference Update="System.Security.Principal.Windows" Version="5.0.0" />
